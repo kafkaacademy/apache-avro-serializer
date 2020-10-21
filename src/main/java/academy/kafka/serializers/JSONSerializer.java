@@ -1,29 +1,23 @@
 package academy.kafka.serializers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Map;
-import org.apache.avro.Schema;
-
-public class JSONSerializer implements Serializer<Object> {
+public class JSONSerializer<T> implements Serializer<T> {
 
     final static private ObjectMapper objectMapper = new ObjectMapper();
 
-    private Boolean isKey;
-    private Class clazz;
-
+  
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        this.isKey = isKey;
-        this.clazz = (Class) configs.get("JSONClass");
-    }
+     }
 
     @Override
-    public byte[] serialize(String topic, Object object) {
+    public byte[] serialize(String topic, T object) {
         try {
             if (object == null) {
                 return null;
@@ -32,7 +26,7 @@ public class JSONSerializer implements Serializer<Object> {
                 return jsonString.getBytes();
             }
         } catch (Exception e) {
-            throw new SerializationException("Error when serializing object of class " + clazz.getName());
+            throw new SerializationException("Error when serializing object ");
         }
     }
 }
