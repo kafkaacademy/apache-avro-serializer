@@ -1,2 +1,4 @@
-# kafka_serializers
-Avro and JSON (de)serializers simple and straight
+# Apache Avro (de)serializer for Apache Kafka
+Avro (de)serializers simple and straight
+
+For educational purposes
