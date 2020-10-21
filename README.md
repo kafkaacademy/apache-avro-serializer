@@ -10,10 +10,10 @@ For educational purposes only!
 This is pure the serializer/deserializer for Apache Avro.
 There is no schema registry!
 
-## Why there is no schema registry
+## Why there is no schema registry?
 
-This will be added separately still this year (2020), inclusing a professional version of there resializers.
+1. This will be added separately still this year (2020), inclusing a professional version of there resializers.
 
-But For fast straight, stable Apacha Kafka applications it can be without.
+2. But For fast straight, stable Apacha Kafka applications it can be without.
 
   
