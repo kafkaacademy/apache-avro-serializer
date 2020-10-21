@@ -11,7 +11,6 @@ import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.SeekableByteArrayInput;
 import org.apache.avro.reflect.ReflectDatumReader;
 import org.apache.avro.specific.SpecificRecordBase;
-import academy.kafka.serializers.examples.AvroPerson;
 import org.apache.kafka.common.errors.SerializationException;
 
 
@@ -35,12 +34,12 @@ public class AvroDeserializer implements Deserializer<SpecificRecordBase> {
 
     private SpecificRecordBase readSpecificDataOneRecord(byte[] bytes, Schema schema) {
         SpecificRecordBase result = null;
-        ReflectDatumReader datumReader = new ReflectDatumReader(schema);
+        ReflectDatumReader<SpecificRecordBase> datumReader = new ReflectDatumReader<SpecificRecordBase>(schema);
         SeekableByteArrayInput inputStream = new SeekableByteArrayInput(bytes);
         try {
-            DataFileReader dataFileReader = new DataFileReader(inputStream, datumReader);
+            DataFileReader<SpecificRecordBase> dataFileReader = new DataFileReader<SpecificRecordBase>(inputStream, datumReader);
 
-            Iterator<AvroPerson> it = dataFileReader.iterator();
+            Iterator<SpecificRecordBase> it = dataFileReader.iterator();
             if (it.hasNext()) {
                 result = it.next();
             }
