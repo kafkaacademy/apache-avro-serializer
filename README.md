@@ -17,3 +17,11 @@ There is no schema registry!
 2. But For fast straight, stable Apacha Kafka applications it can be without.
 
   
+## How to add the serializers/deserializers
+
+```java
+ props.put("schema" , schema);
+ props = ConsumerConfig.addDeserializerToConfig(props, new StringDeserializer(), new AvroDeserializer<AvroPerson>());
+``` 
+Other ways, like with reflection or jacjson introspection can give problems.
+addDeserializerToConfig is the way apache kafka built in, and better use it.
