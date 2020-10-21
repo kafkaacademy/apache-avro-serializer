@@ -16,7 +16,7 @@ public final class JSONConsumer {
     public static void main(String[] args) {
         Properties props = new Properties();
         props.put("JSONClass", JSONPerson.class);
-        props=ConsumerConfig.addDeserializerToConfig(props, new StringDeserializer(), new JSONDeserializer());        
+        props=ConsumerConfig.addDeserializerToConfig(props, new StringDeserializer(), new JSONDeserializer<JSONPerson>());        
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "my_group");

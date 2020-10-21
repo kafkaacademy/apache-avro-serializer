@@ -9,7 +9,7 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
-public class JSONDeserializer implements Deserializer<Object> {
+public class JSONDeserializer<T> implements Deserializer<T> {
     private static ObjectMapper objectMapper = new ObjectMapper();
 
         private Boolean isKey;
@@ -22,11 +22,11 @@ public class JSONDeserializer implements Deserializer<Object> {
     }
   
     @Override
-    public Object deserialize(String topic, byte[] data) {
+    public T deserialize(String topic, byte[] data) {
         if (data == null)
             return null;      
         try {
-          return objectMapper.readValue(data, clazz);
+          return (T)objectMapper.readValue(data, clazz);
          } 
          catch (IOException e) {
             throw new SerializationException("Error when deserializing byte[] to class "+clazz.getName());
