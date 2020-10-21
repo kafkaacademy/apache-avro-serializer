@@ -16,7 +16,7 @@ public final class AvroProducer{
     public static void main(final String[] args) {
         Properties props = new Properties();
         props.put("schema", AvroPerson.getClassSchema());     
-        props = ProducerConfig.addSerializerToConfig(props, new StringSerializer(), new AvroSerializer());
+        props = ProducerConfig.addSerializerToConfig(props, new StringSerializer(), new AvroSerializer<AvroPerson>());
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
       
         final AvroPerson person = new AvroPerson("BSNBSN", "Pietje", "Puk", "IBANIBAN");

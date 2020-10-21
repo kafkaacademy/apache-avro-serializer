@@ -11,7 +11,7 @@ import org.apache.avro.file.DataFileWriter;
 import org.apache.avro.reflect.ReflectDatumWriter;
 import org.apache.avro.specific.SpecificRecordBase;
 
-public class AvroSerializer implements Serializer<SpecificRecordBase> {
+public class AvroSerializer<T extends SpecificRecordBase> implements Serializer<T> {
 
     private Boolean isKey;
     private Schema schema;
@@ -23,7 +23,7 @@ public class AvroSerializer implements Serializer<SpecificRecordBase> {
     }
 
     @Override
-    public byte[] serialize(String topic, SpecificRecordBase record) {
+    public byte[] serialize(String topic, T record) {
         try {
             if (record == null) {
                 return null;
@@ -35,10 +35,10 @@ public class AvroSerializer implements Serializer<SpecificRecordBase> {
         }
     }
 
-    private  byte[] writeSpecificData(SpecificRecordBase record, Schema schema) throws IOException {
+    private  byte[] writeSpecificData(T record, Schema schema) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        ReflectDatumWriter<SpecificRecordBase> datumWriter = new ReflectDatumWriter<SpecificRecordBase>(schema);
-        DataFileWriter<SpecificRecordBase> dataFileWriter = new DataFileWriter<SpecificRecordBase>(datumWriter);
+        ReflectDatumWriter<T> datumWriter = new ReflectDatumWriter<T>(schema);
+        DataFileWriter<T> dataFileWriter = new DataFileWriter<T>(datumWriter);
         dataFileWriter.create(schema, outputStream);
         dataFileWriter.append(record);
         dataFileWriter.flush();

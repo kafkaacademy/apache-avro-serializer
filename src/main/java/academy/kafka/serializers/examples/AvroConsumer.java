@@ -18,7 +18,7 @@ public final class AvroConsumer {
         Properties props = new Properties();
         props.put("schema", AvroPerson.getClassSchema());
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props = ConsumerConfig.addDeserializerToConfig(props, new StringDeserializer(), new AvroDeserializer());
+        props = ConsumerConfig.addDeserializerToConfig(props, new StringDeserializer(), new AvroDeserializer<AvroPerson>());
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "avro_person_group");
 

@@ -14,7 +14,7 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.common.errors.SerializationException;
 
 
-public class AvroDeserializer implements Deserializer<SpecificRecordBase> {
+public class AvroDeserializer<T extends SpecificRecordBase>  implements Deserializer<T> {
     private Boolean isKey;
     private Schema schema;
   
@@ -25,21 +25,21 @@ public class AvroDeserializer implements Deserializer<SpecificRecordBase> {
     }
 
     @Override
-    public SpecificRecordBase deserialize(String topic, byte[] data) {
+    public T deserialize(String topic, byte[] data) {
         if (data == null) {
             return null;
         }
         return readSpecificDataOneRecord(data, schema);
     }
 
-    private SpecificRecordBase readSpecificDataOneRecord(byte[] bytes, Schema schema) {
-        SpecificRecordBase result = null;
-        ReflectDatumReader<SpecificRecordBase> datumReader = new ReflectDatumReader<SpecificRecordBase>(schema);
+    private T readSpecificDataOneRecord(byte[] bytes, Schema schema) {
+        T result = null;
+        ReflectDatumReader<T> datumReader = new ReflectDatumReader<T>(schema);
         SeekableByteArrayInput inputStream = new SeekableByteArrayInput(bytes);
         try {
-            DataFileReader<SpecificRecordBase> dataFileReader = new DataFileReader<SpecificRecordBase>(inputStream, datumReader);
+            DataFileReader<T> dataFileReader = new DataFileReader<T>(inputStream, datumReader);
 
-            Iterator<SpecificRecordBase> it = dataFileReader.iterator();
+            Iterator<T> it = dataFileReader.iterator();
             if (it.hasNext()) {
                 result = it.next();
             }
