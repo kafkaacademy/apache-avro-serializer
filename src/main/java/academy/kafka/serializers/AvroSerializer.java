@@ -10,7 +10,6 @@ import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileWriter;
 import org.apache.avro.reflect.ReflectDatumWriter;
 import org.apache.avro.specific.SpecificRecordBase;
-import academy.kafka.serializers.examples.AvroPerson;
 
 public class AvroSerializer implements Serializer<SpecificRecordBase> {
 
@@ -20,7 +19,7 @@ public class AvroSerializer implements Serializer<SpecificRecordBase> {
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
         this.isKey = isKey;
-        this.schema = (Schema) configs.get("schema");
+        this.schema = (Schema) configs.get("schema");      
     }
 
     @Override
@@ -38,8 +37,8 @@ public class AvroSerializer implements Serializer<SpecificRecordBase> {
 
     private  byte[] writeSpecificData(SpecificRecordBase record, Schema schema) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        ReflectDatumWriter datumWriter = new ReflectDatumWriter<AvroPerson>(schema);
-        DataFileWriter dataFileWriter = new DataFileWriter<AvroPerson>(datumWriter);
+        ReflectDatumWriter datumWriter = new ReflectDatumWriter<>(schema);
+        DataFileWriter dataFileWriter = new DataFileWriter<>(datumWriter);
         dataFileWriter.create(schema, outputStream);
         dataFileWriter.append(record);
         dataFileWriter.flush();
