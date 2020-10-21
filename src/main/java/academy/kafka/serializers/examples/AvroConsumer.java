@@ -30,7 +30,8 @@ public final class AvroConsumer {
                 final ConsumerRecords<String, SpecificRecordBase> consumerRecords = consumer.poll(Duration.ofMillis(100));
 
                 consumerRecords.forEach(record -> {
-                    System.out.printf("Consumer Record:(%s, %s, %s, %s)\n", record.key(), record.value(),
+                    AvroPerson person= (AvroPerson) record.value();
+                    System.out.printf("Consumer Record:(%s, %s, %s, %s)\n", record.key(), person,
                             record.partition(), record.offset());
                 });
                 consumer.commitAsync();

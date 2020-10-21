@@ -3,7 +3,6 @@ package academy.kafka.serializers.examples;
 import academy.kafka.serializers.AvroSerializer;
 import java.util.Properties;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -13,8 +12,6 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 public final class AvroProducer{
-
-    static private ObjectMapper objectMapper = new ObjectMapper();
 
     public static void main(final String[] args) {
         Properties props = new Properties();

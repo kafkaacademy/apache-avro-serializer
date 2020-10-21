@@ -1,4 +1,4 @@
-{"namespace": "taxgame",
+{"namespace": "academy.kafka.serializers.examples",
  "type": "record",
  "name": "AvroPerson",
  "fields": [
