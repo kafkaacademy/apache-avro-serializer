@@ -14,7 +14,7 @@ There is no schema registry!
 
 1. This will be added separately still this year (2020), inclusing a professional version of there serializers.
 
-2. But For fast straight, stable Apacha Kafka applications it can be without.
+2. But for fast straight, stable Apacha Kafka applications it can be without.(sse Less is More)
 
   
 ## How to add the serializers/deserializers
@@ -26,7 +26,7 @@ There is no schema registry!
 Other ways, like with reflection or jackon introspection can give problems.
 addDeserializerToConfig is the way apache kafka built in, and better use it.
 
-# PS Less is more!!
+# PS Less is More!!
 We have the experience that, without a schema registry, probably business critical applications can profit from it.
 For many topics in bussiness critical Kafka applications, changes in the schema's should be limited.
 Also it might be very handy to have special schema's for certain customer group's.
