@@ -1,4 +1,3 @@
-
 package academy.kafka.serializers;
 
 import org.apache.kafka.common.errors.SerializationException;
@@ -10,9 +9,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 public class JSONDeserializer<T> implements Deserializer<T> {
-    private static ObjectMapper objectMapper = new ObjectMapper();
 
-        private Boolean isKey;
+    private static ObjectMapper objectMapper = new ObjectMapper();
+    private Boolean isKey;
     private Class clazz;
 
     @Override
@@ -20,16 +19,19 @@ public class JSONDeserializer<T> implements Deserializer<T> {
         this.isKey = isKey;
         this.clazz = (Class) configs.get("JSONClass");
     }
-  
+
     @Override
     public T deserialize(String topic, byte[] data) {
-        if (data == null)
-            return null;      
+        if (data == null) {
+            return null;
+        }
+        if (clazz == null) {
+            throw new SerializationException("deserializing error: configuration expects that JSONClass is set");
+        }
         try {
-          return (T)objectMapper.readValue(data, clazz);
-         } 
-         catch (IOException e) {
-            throw new SerializationException("Error when deserializing byte[] to class "+clazz.getName());
+            return (T) objectMapper.readValue(data, clazz);
+        } catch (IOException e) {
+            throw new SerializationException("Error when deserializing byte[] to class " + clazz.getName());
         }
 
     }

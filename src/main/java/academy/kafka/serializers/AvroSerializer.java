@@ -19,23 +19,25 @@ public class AvroSerializer<T extends SpecificRecordBase> implements Serializer<
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
         this.isKey = isKey;
-        this.schema = (Schema) configs.get("schema");      
+        this.schema = (Schema) configs.get("schema");
     }
 
     @Override
     public byte[] serialize(String topic, T record) {
+        if (record == null) {
+            return null;
+        }
+        if (schema == null) {
+            throw new SerializationException("deserializing error: configuration expects that \"schema\" is set");
+        }
         try {
-            if (record == null) {
-                return null;
-            } else {
-                return writeSpecificData(record, schema);
-            }
+            return writeSpecificData(record, schema);
         } catch (IOException e) {
             throw new SerializationException("Error when serializing SpecificRecordBase to byte[] for schema " + schema.getName());
         }
     }
 
-    private  byte[] writeSpecificData(T record, Schema schema) throws IOException {
+    private byte[] writeSpecificData(T record, Schema schema) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ReflectDatumWriter<T> datumWriter = new ReflectDatumWriter<T>(schema);
         DataFileWriter<T> dataFileWriter = new DataFileWriter<T>(datumWriter);
