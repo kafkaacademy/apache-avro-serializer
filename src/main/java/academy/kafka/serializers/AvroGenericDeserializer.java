@@ -9,6 +9,7 @@ import java.util.Iterator;
 import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.SeekableByteArrayInput;
+import org.apache.avro.generic.GenericDatumReader;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.DatumReader;
 import org.apache.avro.reflect.ReflectDatumReader;
@@ -38,7 +39,7 @@ public class AvroGenericDeserializer implements Deserializer<GenericRecord> {
 
     private GenericRecord readSpecificDataOneRecord(byte[] bytes, Schema schema) {
        GenericRecord result = null;
-        DatumReader<GenericRecord> datumReader = new ReflectDatumReader<GenericRecord>(schema);
+        DatumReader<GenericRecord> datumReader = new GenericDatumReader<GenericRecord>(schema);
         SeekableByteArrayInput inputStream = new SeekableByteArrayInput(bytes);
         try {
             DataFileReader<GenericRecord> dataFileReader = new DataFileReader<GenericRecord>(inputStream, datumReader);
