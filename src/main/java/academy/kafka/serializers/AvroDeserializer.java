@@ -38,10 +38,10 @@ public class AvroDeserializer<T extends SpecificRecordBase> implements Deseriali
 
     private T readSpecificDataOneRecord(byte[] bytes, Schema schema) {
         T result = null;
-        DatumReader datumReader = new ReflectDatumReader<T>(schema);
+        DatumReader<T> datumReader = new ReflectDatumReader<T>(schema);
         SeekableByteArrayInput inputStream = new SeekableByteArrayInput(bytes);
         try {
-            DataFileReader dataFileReader = new DataFileReader<T>(inputStream, datumReader);
+            DataFileReader<T> dataFileReader = new DataFileReader<T>(inputStream, datumReader);
 
             Iterator<T> it = dataFileReader.iterator();
             if (it.hasNext()) {

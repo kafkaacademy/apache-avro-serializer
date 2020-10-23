@@ -40,7 +40,7 @@ public class AvroSerializer<T extends SpecificRecordBase> implements Serializer<
 
     private byte[] writeSpecificData(T record, Schema schema) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        DatumWriter datumWriter = new SpecificDatumWriter<T>(schema);
+        DatumWriter<T> datumWriter = new SpecificDatumWriter<T>(schema);
         DataFileWriter<T> dataFileWriter = new DataFileWriter<T>(datumWriter);
         dataFileWriter.create(schema, outputStream);
         dataFileWriter.append(record);

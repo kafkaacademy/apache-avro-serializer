@@ -38,7 +38,7 @@ public class AvroGenericDeserializer implements Deserializer<GenericRecord> {
 
     private GenericRecord readSpecificDataOneRecord(byte[] bytes, Schema schema) {
        GenericRecord result = null;
-        DatumReader  datumReader = new ReflectDatumReader<GenericRecord>(schema);
+        DatumReader<GenericRecord> datumReader = new ReflectDatumReader<GenericRecord>(schema);
         SeekableByteArrayInput inputStream = new SeekableByteArrayInput(bytes);
         try {
             DataFileReader<GenericRecord> dataFileReader = new DataFileReader<GenericRecord>(inputStream, datumReader);
