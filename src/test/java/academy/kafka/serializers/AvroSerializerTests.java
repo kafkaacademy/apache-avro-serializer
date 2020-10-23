@@ -16,7 +16,7 @@ public class AvroSerializerTests {
 
     @Test
     public void avroTest() throws IOException {
-        Map<String, Object> configs = new HashMap();
+        Map<String, Object> configs = new HashMap<String, Object>();
         configs.put("schema", AvroPerson.getClassSchema());
         AvroSerializer<AvroPerson> serializer = new AvroSerializer<AvroPerson>();
         serializer.configure(configs, false);
@@ -33,7 +33,7 @@ public class AvroSerializerTests {
 
     @Test
     public void avroNoSchemaConfiguredTest() throws IOException {
-        Map<String, Object> configs = new HashMap();
+        Map<String, Object> configs = new HashMap<String, Object>();
         AvroSerializer<AvroPerson> serializer = new AvroSerializer<AvroPerson>();
         serializer.configure(configs, false);
         AvroDeserializer<AvroPerson> deserializer = new AvroDeserializer<AvroPerson>();
@@ -49,7 +49,7 @@ public class AvroSerializerTests {
     
      @Test
     public void avroNoSchemaConfigured2Test() throws IOException {
-        Map<String, Object> configs = new HashMap();
+        Map<String, Object> configs = new HashMap<String, Object>();
         configs.put("schema", AvroPerson.getClassSchema());
         AvroSerializer<AvroPerson> serializer = new AvroSerializer<AvroPerson>();
         serializer.configure(configs, false);

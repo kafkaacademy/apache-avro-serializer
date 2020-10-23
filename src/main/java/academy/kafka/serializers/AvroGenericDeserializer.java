@@ -11,17 +11,16 @@ import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.SeekableByteArrayInput;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.reflect.ReflectDatumReader;
-import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.common.errors.SerializationException;
 
 public class AvroGenericDeserializer implements Deserializer<GenericRecord> {
 
-    private Boolean isKey;
+  //  private Boolean isKey;
     private Schema schema;
 
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        this.isKey = isKey;
+    //    this.isKey = isKey;
         this.schema = (Schema) configs.get("schema");
     }
 

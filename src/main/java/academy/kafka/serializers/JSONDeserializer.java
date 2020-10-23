@@ -6,18 +6,16 @@ import org.apache.kafka.common.serialization.Deserializer;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
-
 public class JSONDeserializer<T> implements Deserializer<T> {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
-    private Boolean isKey;
-    private Class clazz;
+   // private Boolean isKey;
+    private Class<?> clazz;
 
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        this.isKey = isKey;
-        this.clazz = (Class) configs.get("JSONClass");
+       // this.isKey = isKey;
+        this.clazz = (Class<?>) configs.get("JSONClass");
     }
 
     @Override
@@ -30,7 +28,7 @@ public class JSONDeserializer<T> implements Deserializer<T> {
         }
         try {
             return (T) objectMapper.readValue(data, clazz);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new SerializationException("Error when deserializing byte[] to class " + clazz.getName());
         }
 

@@ -10,16 +10,14 @@ import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileWriter;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.reflect.ReflectDatumWriter;
-import org.apache.avro.specific.SpecificRecordBase;
-
 public class AvroGenericSerializer implements Serializer<GenericRecord> {
 
-    private Boolean isKey;
+ //   private Boolean isKey;
     private Schema schema;
 
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        this.isKey = isKey;
+     //   this.isKey = isKey;
         this.schema = (Schema) configs.get("schema");
     }
 

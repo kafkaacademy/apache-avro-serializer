@@ -15,12 +15,12 @@ import org.apache.kafka.common.errors.SerializationException;
 
 public class AvroDeserializer<T extends SpecificRecordBase> implements Deserializer<T> {
 
-    private Boolean isKey;
+   // private Boolean isKey;
     private Schema schema;
 
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        this.isKey = isKey;
+    //    this.isKey = isKey;
         this.schema = (Schema) configs.get("schema");
     }
 

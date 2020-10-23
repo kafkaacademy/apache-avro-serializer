@@ -11,13 +11,13 @@ public class JSONSerializer<T> implements Serializer<T> {
 
     final static private ObjectMapper objectMapper = new ObjectMapper();
 
-    private Class clazz;
-    private Boolean isKey;
+    private Class<?> clazz;
+ //   private Boolean isKey;
 
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        this.isKey = isKey;
-        this.clazz = (Class) configs.get("JSONClass");
+    //    this.isKey = isKey;
+        this.clazz = (Class<?>) configs.get("JSONClass");
     }
 
     @Override

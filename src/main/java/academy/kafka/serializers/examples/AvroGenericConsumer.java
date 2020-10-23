@@ -1,6 +1,5 @@
 package academy.kafka.serializers.examples;
 
-import academy.kafka.serializers.AvroDeserializer;
 import academy.kafka.serializers.AvroGenericDeserializer;
 import java.time.Duration;
 import java.util.Collections;

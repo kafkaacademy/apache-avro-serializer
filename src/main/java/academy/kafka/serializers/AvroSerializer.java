@@ -13,12 +13,12 @@ import org.apache.avro.specific.SpecificRecordBase;
 
 public class AvroSerializer<T extends SpecificRecordBase> implements Serializer<T> {
 
-    private Boolean isKey;
+   // private Boolean isKey;
     private Schema schema;
 
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        this.isKey = isKey;
+   //     this.isKey = isKey;
         this.schema = (Schema) configs.get("schema");
     }
 

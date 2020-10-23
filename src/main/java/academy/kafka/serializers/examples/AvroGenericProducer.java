@@ -1,7 +1,6 @@
 package academy.kafka.serializers.examples;
 
 import academy.kafka.serializers.AvroGenericSerializer;
-import academy.kafka.serializers.AvroSerializer;
 import java.util.Properties;
 import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericRecord;
