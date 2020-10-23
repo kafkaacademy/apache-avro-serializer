@@ -9,6 +9,7 @@ import java.util.Iterator;
 import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.SeekableByteArrayInput;
+import org.apache.avro.io.DatumReader;
 import org.apache.avro.reflect.ReflectDatumReader;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.common.errors.SerializationException;
@@ -37,10 +38,10 @@ public class AvroDeserializer<T extends SpecificRecordBase> implements Deseriali
 
     private T readSpecificDataOneRecord(byte[] bytes, Schema schema) {
         T result = null;
-        ReflectDatumReader<T> datumReader = new ReflectDatumReader<T>(schema);
+        DatumReader datumReader = new ReflectDatumReader<T>(schema);
         SeekableByteArrayInput inputStream = new SeekableByteArrayInput(bytes);
         try {
-            DataFileReader<T> dataFileReader = new DataFileReader<T>(inputStream, datumReader);
+            DataFileReader dataFileReader = new DataFileReader<T>(inputStream, datumReader);
 
             Iterator<T> it = dataFileReader.iterator();
             if (it.hasNext()) {

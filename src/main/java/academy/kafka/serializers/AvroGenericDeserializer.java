@@ -10,6 +10,7 @@ import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.SeekableByteArrayInput;
 import org.apache.avro.generic.GenericRecord;
+import org.apache.avro.io.DatumReader;
 import org.apache.avro.reflect.ReflectDatumReader;
 import org.apache.kafka.common.errors.SerializationException;
 
@@ -37,7 +38,7 @@ public class AvroGenericDeserializer implements Deserializer<GenericRecord> {
 
     private GenericRecord readSpecificDataOneRecord(byte[] bytes, Schema schema) {
        GenericRecord result = null;
-        ReflectDatumReader<GenericRecord> datumReader = new ReflectDatumReader<GenericRecord>(schema);
+        DatumReader  datumReader = new ReflectDatumReader<GenericRecord>(schema);
         SeekableByteArrayInput inputStream = new SeekableByteArrayInput(bytes);
         try {
             DataFileReader<GenericRecord> dataFileReader = new DataFileReader<GenericRecord>(inputStream, datumReader);

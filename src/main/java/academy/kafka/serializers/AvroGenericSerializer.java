@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileWriter;
 import org.apache.avro.generic.GenericRecord;
+import org.apache.avro.io.DatumWriter;
 import org.apache.avro.reflect.ReflectDatumWriter;
 public class AvroGenericSerializer implements Serializer<GenericRecord> {
 
@@ -38,7 +39,7 @@ public class AvroGenericSerializer implements Serializer<GenericRecord> {
 
     private byte[] writeSpecificData(GenericRecord record, Schema schema) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        ReflectDatumWriter<GenericRecord> datumWriter = new ReflectDatumWriter<GenericRecord>(schema);
+        DatumWriter<GenericRecord> datumWriter = new ReflectDatumWriter<GenericRecord>(schema);
         DataFileWriter<GenericRecord> dataFileWriter = new DataFileWriter<GenericRecord>(datumWriter);
         dataFileWriter.create(schema, outputStream);
         dataFileWriter.append(record);
